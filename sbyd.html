@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标在元素上的位置</title>
+    <style>
+        canvas{border: 2px solid #ccc}
+    </style>
+</head>
+<body>
+    <h2>鼠标在元素上的位置</h2>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    
+    <script>
+        var canvas = document.getElementById('canvas');
+        
+        var con = canvas.getContext('2d');
+        
+        //鼠标在画布上移动 = 回调函数
+        canvas.onmousemove = function(e){
+//            console.log('动一动')
+
+            //元素相对于页面的位置
+//            console.log(canvas.offsetLeft+'---'+canvas.offsetTop)
+            //鼠标相对于页面的位置
+//            console.log(e.pageX+'---'+e.pageY)
+            con.save();
+            con.clearRect(0,0,canvas.width,canvas.height);
+            
+            //获取鼠标在元素上的位置
+            var x = e.pageX - canvas.offsetLeft;
+            var y = e.pageY - canvas.offsetTop;
+            
+            con.strokeStyle = 'red';
+            con.lineWidth = 5;
+            con.beginPath()
+            con.moveTo(0,0);
+            //移动到鼠标的 坐标上
+            con.lineTo(x,y);
+            con.stroke();
+            con.restore();
+        }
+    </script>
+</body>
+</html>
